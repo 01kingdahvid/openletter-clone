@@ -1,0 +1,40 @@
+.page { padding: 3rem 0 5rem; }
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.hero { margin-bottom: 2.5rem; }
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.content { display: flex; flex-direction: column; gap: 2rem; }
+
+.section h2 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.section p {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}

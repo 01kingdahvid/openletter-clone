@@ -1,0 +1,41 @@
+.hero {
+  background: #fff6ed;
+  padding: 60px 20px 80px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 68px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: #111;
+}
+
+.hero p {
+  max-width: 800px;
+  margin: auto;
+  font-size: 20px;
+  color: #555;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 100px 16px 60px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+}
