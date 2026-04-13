@@ -150,7 +150,8 @@ color: oklch(0.145 0 0);
 
 @media (max-width: 480px) {
   .section {
-    padding: 80px 15px;
+    padding: 0px 15px;
+    min-height: auto;
   }
 
   .container {
