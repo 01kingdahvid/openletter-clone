@@ -1,0 +1,158 @@
+/* =========================
+   SECTION BASE
+========================= */
+.section {
+  padding: 120px 20px;
+  position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  justify-content: center;
+  position: relative;
+}
+
+/* =========================
+   COLUMN
+========================= */
+.col {
+  flex: 1;
+  padding: 0 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: start; /* Center-align column content */
+  text-align: left; /* Center-align text */
+}
+
+/* =========================
+   VERTICAL DIVIDER
+========================= */
+.divider {
+  width: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  position: relative;
+  margin: 0 20px; /* Add horizontal margin for spacing */
+}
+
+/* Extend divider to connect with top and bottom borders */
+.divider::before {
+  content: "";
+  position: absolute;
+  top: -120px; /* Match section padding */
+  left: 0;
+  height: calc(100% + 500px); /* Full height + top and bottom padding */
+  width: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   TEXT STYLES
+========================= */
+.subheading {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+font-size: 14px;
+font-weight: 600;
+color: oklch(0.145 0 0);
+  margin-bottom: 10px;
+}
+
+.col h2 {
+  font-family: Newsreader, "Newsreader Fallback";
+font-size: 48px;
+font-weight: 400;
+color: oklch(0.145 0 0);
+  margin-bottom: 15px;
+}
+
+.col p {
+  font-family: Newsreader, "Newsreader Fallback";
+font-size: 20px;
+font-weight: 400;
+line-height: 25px;
+color: oklch(0.145 0 0);
+  max-width: 500px;
+  margin: 0 auto; /* Center the paragraph */
+}
+
+/* =========================
+   BUTTON
+========================= */
+.button {
+  margin-top: 25px;
+  padding: 12px 20px;
+  width: fit-content;
+  background: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s ease;
+  text-align: center; /* Center the button text */
+}
+
+.button:hover {
+  background: #f7f7f7;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet */
+@media (max-width: 1200px) {
+  .col {
+    padding: 0 30px;
+  }
+
+  .col h2 {
+    font-size: 28px;
+  }
+}
+
+/* Small Tablet */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .col {
+    padding: 0;
+    align-items: center;
+  }
+
+  .col p {
+    max-width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .section {
+    padding: 80px 15px;
+  }
+
+  .col h2 {
+    font-size: 24px;
+  }
+
+  .col p {
+    font-size: 14px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
