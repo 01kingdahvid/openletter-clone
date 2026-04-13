@@ -153,11 +153,46 @@ color: oklch(0.145 0 0);
     padding: 80px 15px;
   }
 
+  .container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .left {
+    position: static;
+    text-align: left; /* Center-align left content on mobile */
+  }
+
   .left h1 {
     font-size: 28px;
   }
 
+  .left p {
+    max-width: 100%; /* Full width on mobile */
+    margin: 0 auto; /* Center the paragraph */
+  }
+
+  /* Keep step in a row layout, but adjust spacing */
   .step {
-    flex-direction: column;
+    flex-direction: row; /* Keep number on the left, text on the right */
+    gap: 12px; /* Reduce gap for smaller screens */
+    padding: 15px; /* Slightly smaller padding */
+  }
+
+  /* Adjust number size for mobile */
+  .number {
+    min-width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  /* Adjust text sizing for mobile */
+  .step h3 {
+    font-size: 18px;
+  }
+
+  .step p {
+    font-size: 16px;
+    line-height: 22px;
   }
 }
