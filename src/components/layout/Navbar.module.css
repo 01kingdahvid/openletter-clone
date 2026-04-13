@@ -17,9 +17,10 @@
 
 /* LOGO */
 .logo {
-  font-weight: 700;
-  font-size: 18px;
-  color: #111;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+font-size: 26px;
+font-weight: 600;
+color: oklch(0.145 0 0);
 }
 
 .logo span {

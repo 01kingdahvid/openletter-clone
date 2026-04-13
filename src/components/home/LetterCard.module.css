@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   justify-content: center;
-  padding: 60px 20px;
+  padding: 0px 20px;
   background: #fff6ed;
 }
 
@@ -11,7 +11,7 @@
   max-width: 750px;
   padding: 28px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  /* box-shadow: 0 10px 30px rgba(0,0,0,0.05); */
 }
 
 /* TITLE */

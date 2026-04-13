@@ -41,7 +41,7 @@ export default function Navbar() {
 
         {/* LOGO */}
         <Link href="/" className={styles.logo}>
-          openletter<span>.mars</span>
+          OpenLetter<span>.mars</span>
         </Link>
 
         {/* RIGHT SIDE */}

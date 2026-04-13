@@ -1,0 +1,163 @@
+.section {
+  padding: 120px 20px;
+  position: relative;
+
+  /* KEY: create scroll space */
+  min-height: 200vh;
+}
+
+/* subtle premium glow */
+.section::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: -150px;
+  left: -150px;
+}
+
+.container {
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  gap: 80px;
+  position: sticky;
+  top: 120px; /* Adjust based on your header height */
+  align-items: flex-start; /* Align items to the top */
+}
+
+/* LEFT SIDE */
+.left {
+  flex: 1;
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+.subheading {
+font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+font-size: 12px;
+font-weight: 600;
+color: oklch(0.145 0 0);
+}
+
+.left h1 {
+  font-family: Newsreader, "Newsreader Fallback";
+font-size: 48px;
+font-weight: 400;
+color: oklch(0.145 0 0);
+  margin: 15px 0;
+}
+
+.left p {
+  font-family: Newsreader, "Newsreader Fallback";
+font-size: 20px;
+font-weight: 400;
+color: oklch(0.145 0 0);
+  max-width: 400px;
+}
+
+/* RIGHT SIDE */
+.right {
+  flex: 1;
+  position: relative;
+}
+
+/* Hide scrollbar */
+.right::-webkit-scrollbar {
+  display: none;
+}
+
+.stepper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* STEP CARD */
+.step {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 14px;
+  transition: 0.3s ease;
+  scroll-snap-align: start; /* Ensure each step snaps to the top */
+}
+
+.step:hover {
+  transform: translateY(-5px);
+}
+
+/* NUMBER */
+.number {
+  min-width: 50px;
+  height: 50px;
+  background: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+/* TEXT */
+.step h3 {
+  margin-bottom: 5px;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 24px;
+  font-weight: 600;
+  color: oklch(0.145 0 0);
+}
+
+.step p {
+  font-family: Newsreader, "Newsreader Fallback";
+font-size: 20px;
+font-weight: 400;
+line-height: 28px;
+color: oklch(0.145 0 0);
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 1200px) {
+  .container {
+    gap: 50px;
+  }
+
+  .left h1 {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    position: static;
+  }
+
+  .left {
+    position: static;
+  }
+
+  .right {
+    max-height: none;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 80px 15px;
+  }
+
+  .left h1 {
+    font-size: 28px;
+  }
+
+  .step {
+    flex-direction: column;
+  }
+}
