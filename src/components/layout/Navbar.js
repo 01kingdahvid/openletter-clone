@@ -5,24 +5,55 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import styles from './Navbar.module.css'
+import LoginModal from '../modals/LoginModal'
 
-export default function Navbar() {
+export default function Navbar () {
   const [menuOpen, setMenuOpen] = useState(false)
   const [user, setUser] = useState(null)
   const [showModal, setShowModal] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
 
   const router = useRouter()
   const supabase = createClient()
 
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user)
-    })
+  const [loading, setLoading] = useState(true)
 
-    const { data: { subscription } } =
-      supabase.auth.onAuthStateChange((_, session) => {
-        setUser(session?.user ?? null)
-      })
+  useEffect(() => {
+    const init = async () => {
+      const {
+        data: { session }
+      } = await supabase.auth.getSession()
+
+      if (!session) {
+        setUser(null)
+        setLoading(false)
+        return
+      }
+
+      // 🔥 FORCE VALIDATION AGAINST SERVER
+      const {
+        data: { user },
+        error
+      } = await supabase.auth.getUser()
+
+      if (error || !user) {
+        // session invalid (e.g user deleted)
+        await supabase.auth.signOut()
+        setUser(null)
+      } else {
+        setUser(user)
+      }
+
+      setLoading(false)
+    }
+
+    init()
+
+    const {
+      data: { subscription }
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
 
     return () => subscription.unsubscribe()
   }, [])
@@ -38,44 +69,42 @@ export default function Navbar() {
   return (
     <nav className={styles.nav}>
       <div className={styles.inner}>
-
         {/* LOGO */}
-        <Link href="/" className={styles.logo}>
+        <Link href='/' className={styles.logo}>
           OpenLetter<span>.mars</span>
         </Link>
 
         {/* RIGHT SIDE */}
         <div className={styles.right}>
-
           <div className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
-            <Link href="/about">About</Link>
-            <Link href="/contact">Contact</Link>
+            <Link href='/about'>About</Link>
+            <Link href='/contact'>Contact</Link>
 
-            {!user && (
-              <Link href="/login" className={styles.login}>
+            {!loading && !user && (
+              <button
+                onClick={() => setShowLogin(true)}
+                className={styles.login}
+              >
                 Login
-              </Link>
+              </button>
             )}
 
-            {user && (
+            {!loading && user && (
               <button
                 className={styles.userBtn}
                 onClick={() => setShowModal(!showModal)}
               >
-                <span className={styles.avatar}>
-                  {firstName.charAt(0)}
-                </span>
+                <span className={styles.avatar}>{firstName.charAt(0)}</span>
                 {firstName}
               </button>
             )}
           </div>
 
-
-           {!user && (
-              <Link href="/login" className={styles.log}>
-                Login
-              </Link>
-            )}
+          {!user && (
+            <button onClick={() => setShowLogin(true)} className={styles.log}>
+              Login
+            </button>
+          )}
 
           {/* HAMBURGER */}
           <button
@@ -86,6 +115,13 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
+      {showLogin && (
+        <LoginModal
+          onClose={() => setShowLogin(false)}
+          redirectTo={`${window.location.origin}/verify`}
+        />
+      )}
 
       {/* USER MODAL */}
       {showModal && user && (
@@ -103,9 +139,7 @@ export default function Navbar() {
             <div className={styles.divider} />
 
             <p className={styles.level}>Level 1 Evaluator</p>
-            <p className={styles.progress}>
-              91 signatures until next level
-            </p>
+            <p className={styles.progress}>91 signatures until next level</p>
 
             <button onClick={handleSignOut} className={styles.signOut}>
               Sign out

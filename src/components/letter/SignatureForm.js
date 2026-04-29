@@ -1,31 +1,98 @@
 'use client'
+
 import { useState } from 'react'
+import { Modal, message } from 'antd'
 import AlmostDoneModal from '@/components/modals/AlmostDoneModal'
 import styles from './SignatureForm.module.css'
 
 const COUNTRIES = [
-  'Afghanistan','Albania','Algeria','Argentina','Australia','Austria','Bangladesh',
-  'Belgium','Brazil','Canada','Chile','China','Colombia','Croatia','Czech Republic',
-  'Denmark','Egypt','Ethiopia','Finland','France','Germany','Ghana','Greece',
-  'Hungary','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy',
-  'Japan','Jordan','Kenya','Malaysia','Mexico','Morocco','Netherlands','New Zealand',
-  'Nigeria','Norway','Pakistan','Peru','Philippines','Poland','Portugal','Romania',
-  'Russia','Saudi Arabia','Senegal','Singapore','South Africa','South Korea','Spain',
-  'Sri Lanka','Sweden','Switzerland','Tanzania','Thailand','Turkey','Uganda',
-  'Ukraine','United Kingdom','United States','Vietnam','Zimbabwe'
+  'Afghanistan',
+  'Albania',
+  'Algeria',
+  'Argentina',
+  'Australia',
+  'Austria',
+  'Bangladesh',
+  'Belgium',
+  'Brazil',
+  'Canada',
+  'Chile',
+  'China',
+  'Colombia',
+  'Croatia',
+  'Czech Republic',
+  'Denmark',
+  'Egypt',
+  'Ethiopia',
+  'Finland',
+  'France',
+  'Germany',
+  'Ghana',
+  'Greece',
+  'Hungary',
+  'India',
+  'Indonesia',
+  'Iran',
+  'Iraq',
+  'Ireland',
+  'Israel',
+  'Italy',
+  'Japan',
+  'Jordan',
+  'Kenya',
+  'Malaysia',
+  'Mexico',
+  'Morocco',
+  'Netherlands',
+  'New Zealand',
+  'Nigeria',
+  'Norway',
+  'Pakistan',
+  'Peru',
+  'Philippines',
+  'Poland',
+  'Portugal',
+  'Romania',
+  'Russia',
+  'Saudi Arabia',
+  'Senegal',
+  'Singapore',
+  'South Africa',
+  'South Korea',
+  'Spain',
+  'Sri Lanka',
+  'Sweden',
+  'Switzerland',
+  'Tanzania',
+  'Thailand',
+  'Turkey',
+  'Uganda',
+  'Ukraine',
+  'United Kingdom',
+  'United States',
+  'Vietnam',
+  'Zimbabwe'
 ].sort()
 
-export default function SignatureForm() {
+export default function SignatureForm ({ open, onClose, letterId }) {
   const [form, setForm] = useState({
-    full_name: '', email: '', gender: '',
-    job_title: '', organization: '', honors: '', country: ''
+    full_name: '',
+    email: '',
+    gender: '',
+    job_title: '',
+    organization: '',
+    honors: '',
+    country: ''
   })
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [showModal, setShowModal] = useState(false)
+  const [showAlmostDone, setShowAlmostDone] = useState(false)
   const [submittedEmail, setSubmittedEmail] = useState('')
+  const [error, setError] = useState('')
 
-  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+  const handleChange = e => {
+    const { name, value } = e.target
+    setForm(prev => ({ ...prev, [name]: value }))
+  }
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -35,52 +102,75 @@ export default function SignatureForm() {
     const res = await fetch('/api/sign', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, letter_id: letterId })
     })
 
     const data = await res.json()
     setLoading(false)
 
-    if (!res.ok) {
-      setError(data.error || 'Something went wrong.')
-      return
+    if (res.ok) {
+      message.success('Signature submitted! Please verify your email.')
+      setSubmittedEmail(form.email)
+      // Close Ant Design modal first
+      onClose()
+      // Allow time for modal close animation, then show AlmostDone
+      setTimeout(() => {
+        setShowAlmostDone(true)
+      }, 300)
+    } else {
+      setError(data.error || 'Failed to submit signature.')
+      message.error(data.error || 'Submission failed.')
     }
-
-    setSubmittedEmail(form.email)
-    setShowModal(true)
   }
 
   return (
     <>
-      <div className={styles.card} id="sign">
+      <Modal
+        open={open}
+        onCancel={loading ? undefined : onClose}
+        footer={null}
+        centered
+        width={600}
+        destroyOnHidden
+      >
         <h2 className={styles.heading}>Add your signature</h2>
-        <p className={styles.sub}>Your voice matters. Join thousands who have already signed.</p>
+        <p className={styles.sub}>
+          Your voice matters. Join thousands who have already signed.
+        </p>
 
         <form onSubmit={handleSubmit} className={styles.form} noValidate>
+          {/* Form fields (same as before) */}
           <div className={styles.row}>
             <div className={styles.field}>
-              <label htmlFor="full_name">Full name <span className={styles.req}>*</span></label>
+              <label>Full name *</label>
               <input
-                id="full_name" name="full_name" type="text"
-                value={form.full_name} onChange={handleChange}
-                placeholder="Jane Smith" required
+                name='full_name'
+                value={form.full_name}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className={styles.field}>
-              <label htmlFor="email">Email <span className={styles.req}>*</span></label>
+              <label>Email *</label>
               <input
-                id="email" name="email" type="email"
-                value={form.email} onChange={handleChange}
-                placeholder="jane@example.com" required
+                name='email'
+                type='email'
+                value={form.email}
+                onChange={handleChange}
+                required
               />
             </div>
           </div>
-
           <div className={styles.row}>
             <div className={styles.field}>
-              <label htmlFor="gender">Gender <span className={styles.req}>*</span></label>
-              <select id="gender" name="gender" value={form.gender} onChange={handleChange} required>
-                <option value="">Select…</option>
+              <label>Gender *</label>
+              <select
+                name='gender'
+                value={form.gender}
+                onChange={handleChange}
+                required
+              >
+                <option value=''>Select…</option>
                 <option>Female</option>
                 <option>Male</option>
                 <option>Non-binary</option>
@@ -88,56 +178,55 @@ export default function SignatureForm() {
               </select>
             </div>
             <div className={styles.field}>
-              <label htmlFor="country">Country</label>
-              <select id="country" name="country" value={form.country} onChange={handleChange}>
-                <option value="">Select…</option>
-                {COUNTRIES.map(c => <option key={c}>{c}</option>)}
+              <label>Country</label>
+              <select
+                name='country'
+                value={form.country}
+                onChange={handleChange}
+              >
+                <option value=''>Select…</option>
+                {COUNTRIES.map(c => (
+                  <option key={c}>{c}</option>
+                ))}
               </select>
             </div>
           </div>
-
           <div className={styles.row}>
             <div className={styles.field}>
-              <label htmlFor="job_title">Job title <span className={styles.optional}>(optional)</span></label>
+              <label>Job title</label>
               <input
-                id="job_title" name="job_title" type="text"
-                value={form.job_title} onChange={handleChange}
-                placeholder="Professor of Economics"
+                name='job_title'
+                value={form.job_title}
+                onChange={handleChange}
               />
             </div>
             <div className={styles.field}>
-              <label htmlFor="organization">Organization / Institution <span className={styles.optional}>(optional)</span></label>
+              <label>Organization</label>
               <input
-                id="organization" name="organization" type="text"
-                value={form.organization} onChange={handleChange}
-                placeholder="Harvard University"
+                name='organization'
+                value={form.organization}
+                onChange={handleChange}
               />
             </div>
           </div>
-
           <div className={styles.field}>
-            <label htmlFor="honors">Noteworthy honors <span className={styles.optional}>(optional)</span></label>
-            <input
-              id="honors" name="honors" type="text"
-              value={form.honors} onChange={handleChange}
-              placeholder="Nobel Laureate, FRS, FRSC…"
-            />
+            <label>Honors</label>
+            <input name='honors' value={form.honors} onChange={handleChange} />
           </div>
 
           {error && <p className={styles.error}>{error}</p>}
 
-          <button type="submit" className={styles.submit} disabled={loading}>
+          <button type='submit' disabled={loading} className={styles.submit}>
             {loading ? 'Submitting…' : 'Sign this letter'}
           </button>
-
-          <p className={styles.privacy}>
-            Your email is used only to verify your signature. We never share it publicly.
-          </p>
         </form>
-      </div>
+      </Modal>
 
-      {showModal && (
-        <AlmostDoneModal email={submittedEmail} onClose={() => setShowModal(false)} />
+      {showAlmostDone && (
+        <AlmostDoneModal
+          email={submittedEmail}
+          onClose={() => setShowAlmostDone(false)}
+        />
       )}
     </>
   )

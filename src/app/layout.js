@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
+import 'antd/dist/reset.css'
+
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata = {

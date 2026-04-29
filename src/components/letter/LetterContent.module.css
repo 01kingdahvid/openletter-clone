@@ -1,0 +1,635 @@
+/* app/disrupting-deepfakes/page.module.css */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 12rem;
+  color: #1c1e21;
+}
+
+/* Image Card with Border Radius */
+.imageCard {
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.mapImageWrapper {
+  width: 100%;
+  height: auto;
+  background-color: #e2e8f0;
+}
+
+.mapImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
+
+/* Overlay inside image card (left side) */
+.signatureOverlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: auto;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 1.25rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  max-width: 320px;
+}
+
+.signatureStats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.signatureCount {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #0f172a;
+}
+
+.signButtonSmall {
+ background: #b8e6fe;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.signButtonSmall:hover {
+  background-color: #1e40af;
+}
+
+.notableSigners {
+  font-size: 0.85rem;
+  color: #334155;
+}
+
+/* Context Section */
+.contextSection {
+  margin-bottom: 2.5rem;
+}
+
+.date {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #475569;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #0f172a, #2d4a8c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #2c3e66;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #3b82f6;
+  padding-left: 1rem;
+}
+
+.contextText {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #1e293b;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+/* Statement Container (Blue background) */
+.statementContainer {
+  background-color: #eef2ff;
+  border-radius: 1.5rem;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid #cbd5e1;
+}
+
+.statementHeading {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-bottom: 3px solid #3b82f6;
+  display: inline-block;
+  padding-bottom: 0.25rem;
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+}
+
+.statementContent {
+  color: #0f172a;
+}
+
+.statementText {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.statementList {
+  padding-left: 1.5rem;
+  list-style-type: decimal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.statementList li {
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #1e293b;
+}
+
+/* Reasons Container */
+.reasonsContainer {
+  border-radius: 1.5rem;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e9eef3;
+}
+
+.reasonsIntro {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+}
+
+.reasonsList {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.reasonsList li {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: #2d3a4b;
+  padding-left: 1rem;
+  border-left: 3px solid #94a3b8;
+}
+
+.reasonsList li strong {
+  color: #0c4a6e;
+}
+
+/* Signatures Section */
+.signaturesSection {
+  border-radius: 1.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 3rem;
+}
+
+.signaturesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.totalSignatures {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(145deg, #0f2b4d, #1e3a8a);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.controlsRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  width: 260px;
+  padding: 0.6rem 1rem;
+  border-radius: 3rem;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+.filterSelect {
+  padding: 0.6rem 1rem;
+  border-radius: 3rem;
+  border: 1px solid #cbd5e1;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Signature list cards */
+.signaturesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 700px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.signatureCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 1.25rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 1px solid #edf2f7;
+}
+
+.signatureCard:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateX(4px);
+}
+
+.signatureAvatar {
+  flex-shrink: 0;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+}
+
+.verifiedBadge {
+  background-color: #2563eb;
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.unverifiedBadge {
+  width: 28px;
+  height: 28px;
+  background-color: #e2e8f0;
+  border-radius: 50%;
+}
+
+.signatureInfo {
+  flex: 1;
+}
+
+.signatureName {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0f172a;
+}
+
+.signatureCountry {
+  font-size: 0.8rem;
+  color: #475569;
+  margin-top: 0.2rem;
+}
+
+.signatureHonors {
+  font-size: 0.75rem;
+  color: #5b6e8c;
+  margin-top: 0.25rem;
+  line-height: 1.3;
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  color: #3b82f6;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #2563eb;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.endMessage, .noResults {
+  text-align: center;
+  padding: 1.5rem;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Sticky Bottom Bar */
+.stickyBar {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 380px;
+  background: white;
+  backdrop-filter: blur(16px);
+  border-radius: 1rem;
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.stickyLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.stickyCount {
+  color: black;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.stickyBorder {
+  width: 2px;
+  height: 30px;
+  background-color: #4b5563;
+  margin: 0 1rem 0 0;
+}
+
+.stickySignButton {
+  background-color: #b8e6fe;
+  border: none;
+  padding: 0.6rem 1.8rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.stickySignButton:hover {
+  background-color: #b8e6fe;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 1rem;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 2rem;
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 25px 40px rgba(0,0,0,0.3);
+  animation: fadeInUp 0.2s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e9eef3;
+  background: #fafcff;
+}
+
+.modalVerified {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.verifiedBadgeLarge {
+  background-color: #2563eb;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.modalName {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #64748b;
+  line-height: 1;
+}
+
+.modalBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.modalDetail {
+  font-size: 1rem;
+  color: #1e293b;
+  word-break: break-word;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+  color: #334155;
+}
+
+.modalEmail {
+  font-family: monospace;
+  letter-spacing: 0.3px;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1024px;
+    padding: 1.5rem;
+  }
+  .title {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  .imageCard {
+    border-radius: 1.5rem;
+  }
+  .signatureOverlay {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    max-width: none;
+  }
+  .title {
+    font-size: 1.9rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  .statementContainer {
+    padding: 1.25rem;
+  }
+  .reasonsContainer {
+    padding: 1rem;
+  }
+  .signaturesHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .controlsRow {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .searchInput {
+    width: 65%;
+  }
+  .filterSelect {
+    width: 30%;
+  }
+  .stickyBar {
+    width: calc(100% - 1rem);
+    bottom: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+  .stickyCount {
+    font-size: 0.9rem;
+  }
+  .stickySignButton {
+    padding: 0.4rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.6rem;
+  }
+  .signatureCount {
+    font-size: 1rem;
+  }
+  .signButtonSmall {
+    font-size: 0.75rem;
+  }
+  .statementHeading {
+    font-size: 1.4rem;
+  }
+  .signatureCard {
+    padding: 0.8rem;
+  }
+  .signatureName {
+    font-size: 0.9rem;
+  }
+  .modalContent {
+    margin: 1rem;
+  }
+  .modalName {
+    font-size: 1.2rem;
+  }
+  .controlsRow {
+    gap: 0.5rem;
+  }
+  .stickyBar {
+    border-radius: 2rem;
+  }
+  .stickyLeft {
+    gap: 0.5rem;
+  }
+}
